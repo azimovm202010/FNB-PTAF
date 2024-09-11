@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.fnb_ptaf.GetTargetLocator;
 
-
 public class CommonMethods implements HandleAction, WaitAction {
     private final Page page;
     private static final Logger logger = LoggerFactory.getLogger(CommonMethods.class);
@@ -50,8 +49,8 @@ public class CommonMethods implements HandleAction, WaitAction {
      * @param element The name of the element as defined in the YAML configuration.
      * @param locator The key to locate the element's selector.
      */
-    public void clickOnLocator(Page page, String element, String locator) {
-        performActionOnContext("click", page, element, locator, null);
+    public void clickOnLocator( String element, String locator) {
+        performActionOnContext("click", element, locator, null);
     }
 
     /**
@@ -64,7 +63,7 @@ public class CommonMethods implements HandleAction, WaitAction {
      * @param value   The value to fill into the input field.
      */
     public void fillOnLocator(Page page, String element, String locator, String value) {
-        performActionOnContext("fill", page, element, locator, value);
+        performActionOnContext("fill", element, locator, value);
     }
 
     /**
@@ -75,8 +74,8 @@ public class CommonMethods implements HandleAction, WaitAction {
      * @param locator The key to locate the element's selector.
      * @param value   The option to select from the dropdown or selection element.
      */
-    public void selectOptionOnLocator(Page page, String element, String locator, String value) {
-        performActionOnContext("select", page, element, locator, value);
+    public void selectOptionOnLocator( String element, String locator, String value) {
+        performActionOnContext("select", element, locator, value);
     }
 
     /**
@@ -87,7 +86,7 @@ public class CommonMethods implements HandleAction, WaitAction {
      * @param locator The locator key to locate the element on the page.
      */
     public void check(String element, String locator) {
-        performAction("check", page, element, locator, null);
+        performAction("check", element, locator, null);
     }
 
     /**
@@ -98,7 +97,7 @@ public class CommonMethods implements HandleAction, WaitAction {
      * @param locator The locator key to locate the element on the page.
      */
     public void uncheck(String element, String locator) {
-        performAction("uncheck", page, element, locator, null);
+        performAction("uncheck", element, locator, null);
     }
 
     /**
@@ -109,7 +108,7 @@ public class CommonMethods implements HandleAction, WaitAction {
      * @param locator The locator key to locate the element on the page.
      */
     public void hover(String element, String locator) {
-        performAction("hover", page, element, locator, null);
+        performAction("hover", element, locator, null);
     }
 
     /**
@@ -120,7 +119,7 @@ public class CommonMethods implements HandleAction, WaitAction {
      * @param locator The locator key to locate the element on the page.
      */
     public void type(String element, String locator) {
-        performAction("type", page, element, locator, null);
+        performAction("type", element, locator, null);
     }
 
     /**
@@ -131,7 +130,7 @@ public class CommonMethods implements HandleAction, WaitAction {
      * @param locator The locator key to locate the element on the page.
      */
     public void press(String element, String locator) {
-        performAction("press", page, element, locator, null);
+        performAction("press", element, locator, null);
     }
 
     /**
@@ -142,7 +141,7 @@ public class CommonMethods implements HandleAction, WaitAction {
      * @param locator The locator key to locate the element on the page.
      */
     public void dblclick(String element, String locator) {
-        performAction("dblclick", page, element, locator, null);
+        performAction("dblclick", element, locator, null);
     }
 
     /**
@@ -154,15 +153,14 @@ public class CommonMethods implements HandleAction, WaitAction {
      * @param locator The key to locate the element's selector.
      * @param value   The value to be used in the action, if applicable (e.g., text to fill).
      */
-    private void performActionOnContext(String action, Page page, String element, String locator, String value) {
+    private void performActionOnContext(String action, String element, String locator, String value) {
         try {
-            performAction(action, page, element, locator, value);
+            performAction(action, element, locator, value);
         } catch (Exception e) {
             logger.error("Failed to perform '{}' action on element '{}'", action, element, e);
         }
     }
-
-    private void performAction(String action, Page page, String element, String key, String value) {
+    private void performAction(String action, String element, String key, String value) {
         try {
             Locator targetLocator = GetTargetLocator.getTargetLocator(page, element, key);
             WaitAction.WAIT(targetLocator);
