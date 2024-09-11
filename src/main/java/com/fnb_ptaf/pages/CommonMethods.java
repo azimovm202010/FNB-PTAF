@@ -47,11 +47,10 @@ public class CommonMethods implements HandleAction, WaitAction {
      * This method is designed for external use, allowing other parts of the code to
      * interact with elements by simulating a click.
      *
-     * @param context The context in which the element is located (e.g., frame, window).
      * @param element The name of the element as defined in the YAML configuration.
      * @param locator The key to locate the element's selector.
      */
-    public void clickOnLocator(String context, Page page, String element, String locator) {
+    public void clickOnLocator(Page page, String element, String locator) {
         performActionOnContext("click", page, element, locator, null);
     }
 
@@ -60,12 +59,11 @@ public class CommonMethods implements HandleAction, WaitAction {
      * This method is designed for external use, allowing other parts of the code to
      * interact with input fields by filling them with the specified value.
      *
-     * @param context The context in which the element is located (e.g., frame, window).
      * @param element The name of the element as defined in the YAML configuration.
      * @param locator The key to locate the element's selector.
      * @param value   The value to fill into the input field.
      */
-    public void fillOnLocator(String context, Page page, String element, String locator, String value) {
+    public void fillOnLocator(Page page, String element, String locator, String value) {
         performActionOnContext("fill", page, element, locator, value);
     }
 
@@ -73,13 +71,11 @@ public class CommonMethods implements HandleAction, WaitAction {
      * Public method to perform a select option action on an element within a specific context.
      * This method is designed for external use, allowing other parts of the code to
      * interact with dropdowns or selection elements by selecting the specified option.
-     *
-     * @param context The context in which the element is located (e.g., frame, window).
-     * @param element The name of the element as defined in the YAML configuration.
+     ** @param element The name of the element as defined in the YAML configuration.
      * @param locator The key to locate the element's selector.
      * @param value   The option to select from the dropdown or selection element.
      */
-    public void selectOptionOnLocator(String context, Page page, String element, String locator, String value) {
+    public void selectOptionOnLocator(Page page, String element, String locator, String value) {
         performActionOnContext("select", page, element, locator, value);
     }
 
